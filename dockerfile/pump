@@ -1,0 +1,9 @@
+FROM ${base_image}
+
+COPY pump /pump
+COPY drainer /drainer
+COPY reparo /reparo
+COPY binlogctl /binlogctl
+EXPOSE 4000
+EXPOSE 8249 8250
+CMD ["/pump"]

@@ -1,0 +1,11 @@
+FROM  ${base_image}
+
+COPY  ./kylin_aarch64.repo /etc/yum.repos.d
+COPY ./pd-server /pd-server
+COPY ./pd-ctl /pd-ctl
+COPY ./pd-recover /pd-recover
+RUN yum makecache &&\
+    dnf install bind-utils curl nmap-ncat -y && \
+    dnf clean all
+EXPOSE 2379 2380
+ENTRYPOINT ["/pd-server"]

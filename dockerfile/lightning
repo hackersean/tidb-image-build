@@ -1,0 +1,4 @@
+FROM ${base_image}
+
+COPY ./tidb-lightning /tidb-lightning
+COPY ./tidb-lightning-ctl /tidb-lightning-ctl

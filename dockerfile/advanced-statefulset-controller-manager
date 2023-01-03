@@ -1,0 +1,4 @@
+FROM ${base_image}
+
+COPY 20221108/advanced-statefulset-controller-manager /usr/local/bin/advanced-statefulset-controller-manager
+ENTRYPOINT ["/usr/local/bin/advanced-statefulset-controller-manager"]

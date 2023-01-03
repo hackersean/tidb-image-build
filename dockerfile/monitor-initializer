@@ -1,0 +1,11 @@
+FROM ${base_image}
+
+COPY 20221108/init.sh /usr/bin/init.sh
+RUN chmod +x /usr/bin/init.sh
+
+COPY 20221108/tmp/*.json /tmp/
+COPY 20221108/tmp/*.yml /tmp/
+COPY 20221108/tmp/*.yaml /tmp/
+
+ENTRYPOINT ["/usr/bin/init.sh"]
+CMD ["TIDB-Cluster", "/grafana-dashboard-definitions/tidb/", "false", "/etc/prometheus"]
