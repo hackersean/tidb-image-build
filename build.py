@@ -2,9 +2,6 @@
 
 import sys
 
-reload(sys)  #必须要reload
-sys.setdefaultencoding('utf-8')
-
 import os
 import argparse
 try:
@@ -35,8 +32,7 @@ def make_build_dir(docker_file_path, build_path):
         #print build_path,filename
         subpath = os.path.join(build_path, "/images", filename)
         #print(subpath)
-        if not os.path.exists(subpath):
-            os.makedirs(subpath, exist_ok=True)
+        os.makedirs(subpath, exist_ok=True)
 
 
 #def decompression_binary_packet(out_path,)
@@ -75,7 +71,7 @@ def main():
     try:
         decompression_total_binary_packet(tar_path, build_tmp_path)
         make_build_dir(args.docker_file_path, build_tmp_path)
-    except BaseException, e:
+    except BaseException(e):
         for v in e:
             print("error: %s" % v)
         raise
