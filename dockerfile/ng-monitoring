@@ -1,4 +1,3 @@
-FROM ${base_image}
 
 COPY ng-monitoring-server /ng-monitoring-server
 RUN chmod +x /ng-monitoring-server

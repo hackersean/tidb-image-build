@@ -1,6 +1,4 @@
-FROM  ${base_image}
 
-COPY  ./kylin_aarch64.repo /etc/yum.repos.d
 COPY tidb-server /tidb-server
 RUN yum makecache &&\
     dnf install bind-utils curl nmap-ncat -y && \

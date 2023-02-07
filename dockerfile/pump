@@ -1,4 +1,3 @@
-FROM ${base_image}
 
 COPY pump /pump
 COPY drainer /drainer

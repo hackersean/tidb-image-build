@@ -1,4 +1,3 @@
-FROM ${base_image}
 
 ENV TZ=/etc/localtime
 ENV TZDIR=/usr/share/zoneinfo

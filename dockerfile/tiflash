@@ -1,4 +1,3 @@
-FROM ${base_image}
 
 USER root
 WORKDIR /root/
