@@ -194,7 +194,7 @@ def main():
             error_list.append(dockerfile_template_path)
 
     if len(error_list) > 0:
-        print("# error list [%s]" % (" ".join(error_list),))
+        print("# error list [ %s ]" % (" ".join(error_list),))
 
 
 if __name__ == "__main__":
