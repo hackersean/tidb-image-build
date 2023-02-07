@@ -23,7 +23,7 @@ ls tidb-enterprise-server-v6.1.1-linux-amd64/*.tar.gz | xargs -P4 -i  tar xzvf '
 ```
 ## 运行命令
 ```bash
-python build.py --mirror-dir ~/tmp/build/mirror/ --work-path ~/tmp/worker/ --dockerfile-template dockerfile/tikv --base-image gcr.io/pingcap-public/pingcap/alpine-glibc:alpine-3.14.3 --image-namespace "pingcap.com/test" --image-version v6.1.1 --log-file=/tmp/build.log
+python build.py --mirror-dir /tmp/build/mirror/ --work-path /tmp/worker/ --dockerfile-template dockerfile/tikv --base-image gcr.io/pingcap-public/pingcap/alpine-glibc:alpine-3.14.3 --image-namespace "pingcap.com/test" --image-version v6.1.1 --log-file=/tmp/build.log
 ```
 
 # 备注
