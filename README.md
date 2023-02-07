@@ -30,6 +30,7 @@ python build.py --mirror-dir ~/tmp/build/mirror/ --work-path ~/tmp/worker/ --doc
 ## 注意
 1. 历史镜像制作的遗留问题，lightning镜像中会有br工具，请注意。
 2. 如用户有特殊配置，比如yum repo等，请先制作base镜像，再以base镜像作为基础制作组件镜像。
+3. check_image 中，通过运行镜像判断镜像是否可用，passCodes可根据情况更新，默认返回值为0。
 
 ## 清理重复镜像
 如果重复build同tag名的镜像，新的镜像会把旧的镜像取代。如果制作镜像的机器空间满了，可以清理下。

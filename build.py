@@ -111,7 +111,7 @@ def prepare_build_file(dockerfile_path, mirror_path, build_path):
             continue
 
         if tmp_list[0] == "COPY":
-            cmd_list.append("cd %s && cp %s %s" %
+            cmd_list.append("cd %s && cp -r %s %s" %
                             (mirror_path, "".join(tmp_list[1:-1]), build_path))
 
     os.makedirs(build_path, exist_ok=True)
@@ -125,11 +125,12 @@ def prepare_build_file(dockerfile_path, mirror_path, build_path):
 
 
 def check_image(component, image_name):
-    successReturnCodes = {}
+    passCodes = {}  # componet:returnCode
+    passCode = passCodes.get(component, 0)
     CMD_TMP = "docker run -it --rm {image_name} -h".format(
         image_name=image_name)
     (returnCode, output) = command(CMD_TMP)
-    if returnCode != 0:
+    if returnCode != passCode:
         raise RuntimeError("check error: %s" % output)
     return
 
