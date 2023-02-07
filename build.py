@@ -1,20 +1,18 @@
-#coding=utf-8
+# coding=utf-8
 
 import sys
 
 import os
 import argparse
-try:
-    import commands
-except ImportError:
-    import subprocess as commands
+import subprocess
+import logging
 
 TAR_CMD = "tar -zxvf {tar_path} -C {out_path}"
 
 
 def command(cmd):
-    print(cmd)
-    result = commands.getstatusoutput(cmd)
+    logging.debug("command:[%s]", cmd)
+    result = subprocess.getstatusoutput(cmd)
     return result
 
 
@@ -27,15 +25,24 @@ def decompression_total_binary_packet(tar_path, out_path):
     return
 
 
-def make_build_dir(docker_file_path, build_path):
-    for filename in os.listdir(docker_file_path):
-        #print build_path,filename
-        subpath = os.path.join(build_path, "/images", filename)
-        #print(subpath)
+def make_build_dir(component_lsit, build_path):
+    for filename in component_lsit:
+        # print build_path,filename
+        subpath = os.path.join(build_path, "images", filename)
+        # print(subpath)
         os.makedirs(subpath, exist_ok=True)
 
 
-#def decompression_binary_packet(out_path,)
+def decompression_every_binary_packet(component_lsit, tar_path, build_path):
+    _, tar_filename = os.path.split(tar_path)
+    tar_dir = os.path.join(build_path,
+                           tar_filename.split(".tar.gz")[0])
+    for file in os.listdir(tar_dir):
+        if file.endswith(".tar.gz"):
+            print(file.split("-v")[0])
+    print("\n")
+    for name in component_lsit:
+        print(name)
 
 
 def init():
@@ -65,17 +72,25 @@ def init():
 
 def main():
     args = init()
-    #print(args)
+    # print(args)
     tar_path = args.tidb_binary_packet
     build_tmp_path = args.build_tmp_path
     try:
-        decompression_total_binary_packet(tar_path, build_tmp_path)
-        make_build_dir(args.docker_file_path, build_tmp_path)
-    except BaseException(e):
-        for v in e:
-            print("error: %s" % v)
+        component_lsit = os.listdir(args.docker_file_path)
+        logging.info("decompression %s", tar_path)
+        # decompression_total_binary_packet(tar_path, build_tmp_path)
+        make_build_dir(component_lsit, build_tmp_path)
+        logging.info("complete decompression %s", tar_path)
+        decompression_every_binary_packet(
+            component_lsit, tar_path, build_tmp_path)
+    except BaseException:
         raise
 
 
 if __name__ == "__main__":
+    LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+    DATE_FORMAT = "%m/%d/%Y %H:%M:%S %p"
+    logging.basicConfig(level=logging.DEBUG,
+                        format=LOG_FORMAT, datefmt=DATE_FORMAT)
+
     main()
