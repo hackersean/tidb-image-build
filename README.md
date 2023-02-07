@@ -34,6 +34,7 @@ python build.py --mirror-dir ~/tmp/build/mirror/ --work-path ~/tmp/worker/ --doc
 
 ## 清理重复镜像
 如果重复build同tag名的镜像，新的镜像会把旧的镜像取代。如果制作镜像的机器空间满了，可以清理下。
+如果镜像在使用，则不会被清理。
 ``` bash
 docker rmi `docker images|grep none|awk '{print $3}'`
 ```
