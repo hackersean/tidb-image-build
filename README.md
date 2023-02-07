@@ -21,7 +21,8 @@ build  指定的镜像
 ```bash
 ls tidb-enterprise-server-v6.1.1-linux-amd64/*.tar.gz | xargs -P4 -i  tar xzvf '{}' -C mirror
 ```
-## 运行命令
+## 参考命令
+建议将日志输出到文件，这样标准输出的信息可以直接复制执行。
 ```bash
 python build.py --mirror-dir /tmp/build/mirror/ --work-path /tmp/worker/ --dockerfile-template dockerfile/tikv --base-image gcr.io/pingcap-public/pingcap/alpine-glibc:alpine-3.14.3 --image-namespace "pingcap.com/test" --image-version v6.1.1 --log-file=/tmp/build.log
 ```
