@@ -125,13 +125,13 @@ def prepare_build_file(dockerfile_path, mirror_path, build_path):
 
 
 def check_image(component, image_name):
-    passCodes = {}  # componet:returnCode
+    passCodes = {"tiflash": 78}  # componet:returnCode
     passCode = passCodes.get(component, 0)
     CMD_TMP = "docker run -it --rm {image_name} -h".format(
         image_name=image_name)
     (returnCode, output) = command(CMD_TMP)
     if returnCode != passCode:
-        raise RuntimeError("check error: %s" % output)
+        raise RuntimeError("check error for %s: %s" % (image_name, output))
     return
 
 
